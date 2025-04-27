@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart';
-
-import 'login_page.dart';
-import 'signup_page.dart'; // Make sure you create separate files for them if you want cleaner code.
+import 'package:project_charon/auth/login_page.dart';
+import 'package:project_charon/auth/signup_page.dart';
 
 class AuthPage extends StatefulWidget {
   final Account account;
@@ -13,18 +12,20 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  bool showLogin = true; // Start by showing login
+  bool showLoginPage = true;
 
   void togglePages() {
     setState(() {
-      showLogin = !showLogin;
+      showLoginPage = !showLoginPage;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return showLogin
-        ? LoginPage(account: widget.account, onToggle: togglePages)
-        : SignupPage(account: widget.account, onToggle: togglePages);
+    if (showLoginPage) {
+      return LoginPage(account: widget.account, onTap: togglePages);
+    } else {
+      return SignupPage(account: widget.account, onTap: togglePages);
+    }
   }
 }

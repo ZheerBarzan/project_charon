@@ -7,9 +7,8 @@ import 'package:project_charon/views/home_page.dart';
 
 class SignupPage extends StatefulWidget {
   final Account account;
-  final VoidCallback onToggle; // <-- Add this
-
-  const SignupPage({super.key, required this.account, required this.onToggle});
+  final VoidCallback onTap;
+  const SignupPage({super.key, required this.account, required this.onTap});
 
   @override
   State<SignupPage> createState() => _SignupPageState();
@@ -39,7 +38,9 @@ class _SignupPageState extends State<SignupPage> {
       // Navigate to HomePage
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(
+          builder: (context) => HomePage(account: widget.account),
+        ),
       );
     } on AppwriteException catch (e) {
       // Handle signup error
@@ -90,8 +91,8 @@ class _SignupPageState extends State<SignupPage> {
             ),
             SizedBox(height: 16.0),
             TextButton(
-              onPressed: widget.onToggle, // <-- call toggle when clicked
-              child: Text('Already have an account? Login'),
+              onPressed: widget.onTap,
+              child: const Text("Already have an account? Login"),
             ),
           ],
         ),
