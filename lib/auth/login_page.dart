@@ -4,104 +4,83 @@ import 'package:appwrite/models.dart' as models;
 
 class LoginPage extends StatefulWidget {
   final Account account;
-  const LoginPage({super.key, required this.account});
+  final VoidCallback onToggle; // <-- Add this
+
+  const LoginPage({super.key, required this.account, required this.onToggle});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  models.User? loggedInUser;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus();
+  }
+
+  Future<void> checkLoginStatus() async {
+    try {
+      final user = await widget.account.get();
+      if (user != null) {
+        // User is already logged in
+        Navigator.pushReplacementNamed(context, '/home');
+      }
+    } catch (e) {
+      // No active session or error, stay on login page
+      print('No active session: $e');
+    }
+  }
 
   Future<void> login(String email, String password) async {
-    await widget.account.createEmailPasswordSession(
-      email: email,
-      password: password,
-    );
-    final user = await widget.account.get();
-    setState(() {
-      loggedInUser = user;
-    });
-  }
-
-  Future<void> register(String email, String password, String name) async {
-    await widget.account.create(
-      userId: ID.unique(),
-      email: email,
-      password: password,
-      name: name,
-    );
-    await login(email, password);
-  }
-
-  Future<void> logout() async {
-    await widget.account.deleteSession(sessionId: 'current');
-    setState(() {
-      loggedInUser = null;
-    });
+    try {
+      await widget.account.createEmailPasswordSession(
+        email: email,
+        password: password,
+      );
+      Navigator.pushReplacementNamed(context, '/home');
+    } catch (e) {
+      print('Login failed: $e');
+      // Show a snackbar or dialog if you want
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            loggedInUser != null
-                ? 'Logged in as ${loggedInUser!.name}'
-                : 'Not logged in',
-          ),
-          SizedBox(height: 16.0),
-          TextField(
-            controller: emailController,
-            decoration: InputDecoration(labelText: 'Email'),
-          ),
-          SizedBox(height: 16.0),
-          TextField(
-            controller: passwordController,
-            decoration: InputDecoration(labelText: 'Password'),
-            obscureText: true,
-          ),
-          SizedBox(height: 16.0),
-          TextField(
-            controller: nameController,
-            decoration: InputDecoration(labelText: 'Name'),
-          ),
-          SizedBox(height: 16.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              ElevatedButton(
-                onPressed: () {
-                  login(emailController.text, passwordController.text);
-                },
-                child: Text('Login'),
-              ),
-              SizedBox(width: 16.0),
-              ElevatedButton(
-                onPressed: () {
-                  register(
-                    emailController.text,
-                    passwordController.text,
-                    nameController.text,
-                  );
-                },
-                child: Text('Register'),
-              ),
-              SizedBox(width: 16.0),
-              ElevatedButton(
-                onPressed: () {
-                  logout();
-                },
-                child: Text('Logout'),
-              ),
-            ],
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: emailController,
+              decoration: const InputDecoration(labelText: 'Email'),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: const InputDecoration(labelText: 'Password'),
+            ),
+            const SizedBox(height: 32),
+            ElevatedButton(
+              onPressed: () {
+                login(emailController.text, passwordController.text);
+              },
+              child: const Text('Login'),
+            ),
+
+            const SizedBox(height: 16),
+            TextButton(
+              onPressed: widget.onToggle, // <-- Call the toggle function
+              child: const Text('Don\'t have an account? Sign up'),
+            ),
+          ],
+        ),
       ),
     );
   }
