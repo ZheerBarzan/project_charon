@@ -2,92 +2,114 @@
 import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:project_charon/components/my_drawer.dart';
-import 'package:project_charon/views/debtors_page.dart'; // Add this import
+import 'package:project_charon/views/debtors_page.dart';
+import 'package:project_charon/views/mange_debtor.dart';
+import 'package:project_charon/views/profile_page.dart';
+import 'package:project_charon/views/settings_page.dart'; // Add this import
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final Account account;
   final models.User? user;
 
   const HomePage({super.key, required this.account, this.user});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0),
-          child: Text('Hello ${user?.name ?? ""}'),
-        ),
-      ),
-      drawer: MyDrawer(account: account, user: user),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 40),
-            _buildFeatureCard(
-              context,
-              'Manage Debtors',
-              'Track people who owe you money',
-              Icons.people,
-              () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const DebtorsPage()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _currentIndex = 0;
+
+  List pages = [
+    const MangeDebtor(),
+    const DebtorsPage(),
+    const SettingsPage(),
+    const ProfilePage(),
+  ];
+
+  void goToPages(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 
-  Widget _buildFeatureCard(
-    BuildContext context,
-    String title,
-    String description,
-    IconData icon,
-    VoidCallback onTap,
-  ) {
-    return Card(
-      elevation: 10,
-      child: InkWell(
-        onTap: onTap,
+  AppBar _buildAppBar() {
+    switch (_currentIndex) {
+      case 0:
+        return AppBar(title: Text("Hello ${widget.user?.name}"));
+      case 1:
+        return AppBar(title: const Text("Debtors List"));
+      case 2:
+        return AppBar(title: const Text("Settings"));
+      case 3:
+        return AppBar(title: const Text("Profile"));
+      default:
+        return AppBar();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.user == null) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+    if (widget.user?.name == null) {
+      return const Scaffold(body: Center(child: Text("User not found")));
+    }
+
+    return Scaffold(
+      appBar: _buildAppBar(),
+      drawer: MyDrawer(user: widget.user!, account: widget.account),
+      body: pages[_currentIndex],
+
+      bottomNavigationBar: Container(
+        color: Theme.of(context).colorScheme.inverseSurface,
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              Icon(
-                icon,
-                size: 48,
-                color: Theme.of(context).colorScheme.primary,
+          padding: const EdgeInsets.all(10),
+          child: GNav(
+            backgroundColor: Theme.of(context).colorScheme.inverseSurface,
+            gap: 8,
+            onTabChange: (index) => goToPages(index),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            tabs: [
+              GButton(
+                borderRadius: BorderRadius.circular(25),
+                icon: Icons.home,
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                iconActiveColor: Colors.white,
+                iconColor: Colors.white,
+                text: "Home",
+                textColor: Theme.of(context).colorScheme.surface,
               ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      description,
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.inverseSurface,
-                      ),
-                    ),
-                  ],
-                ),
+              GButton(
+                borderRadius: BorderRadius.circular(25),
+                icon: Icons.list,
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                iconActiveColor: Colors.white,
+                iconColor: Colors.white,
+                text: "Debtors",
+                textColor: Theme.of(context).colorScheme.surface,
               ),
-              const Icon(Icons.arrow_forward_ios),
+              GButton(
+                borderRadius: BorderRadius.circular(25),
+                icon: Icons.settings_outlined,
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                iconActiveColor: Colors.white,
+                iconColor: Colors.white,
+                text: "Settings",
+                textColor: Theme.of(context).colorScheme.surface,
+              ),
+              GButton(
+                borderRadius: BorderRadius.circular(25),
+                icon: Icons.person,
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                iconActiveColor: Colors.white,
+                iconColor: Colors.white,
+                text: "Profile",
+                textColor: Theme.of(context).colorScheme.surface,
+              ),
             ],
           ),
         ),

@@ -119,7 +119,7 @@ class _DebtorDetailPageState extends State<DebtorDetailPage> {
         title: Text(_debtor!.name),
         actions: [
           IconButton(
-            icon: const Icon(Icons.delete),
+            icon: const Icon(Icons.delete, color: Colors.red),
             onPressed: () {
               showDialog(
                 context: context,
@@ -244,7 +244,7 @@ class _DebtorDetailPageState extends State<DebtorDetailPage> {
                             ],
                           ),
                           trailing: IconButton(
-                            icon: const Icon(Icons.delete),
+                            icon: const Icon(Icons.delete, color: Colors.red),
                             onPressed: () => _deleteTransaction(transaction),
                           ),
                         );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart';
-import 'package:appwrite/models.dart' as models;
 import 'package:project_charon/views/home_page.dart';
 
 // Dummy HomePage, you can replace it with your real HomePage
@@ -95,6 +94,17 @@ class _SignupPageState extends State<SignupPage> {
                 ),
                 SizedBox(height: 50.0),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    foregroundColor: Theme.of(context).colorScheme.surface,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 100.0,
+                      vertical: 15.0,
+                    ),
+                  ),
                   onPressed: () {
                     signup(
                       emailController.text.trim(),
@@ -102,7 +112,14 @@ class _SignupPageState extends State<SignupPage> {
                       nameController.text.trim(),
                     );
                   },
-                  child: Text('Sign Up'),
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.surface,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
                 SizedBox(height: 16.0),
                 TextButton(

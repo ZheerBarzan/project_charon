@@ -6,6 +6,6 @@ ThemeData darkMode = ThemeData(
     primary: Colors.blueAccent,
     secondary: Colors.redAccent,
     tertiary: Colors.greenAccent,
-    surface: Colors.grey.shade800,
+    surface: Colors.grey.shade900,
   ),
 );

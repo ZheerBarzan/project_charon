@@ -1,3 +1,4 @@
+import 'package:appwrite/models.dart' as models;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_charon/themes/theme_provider.dart';
@@ -9,16 +10,18 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Settings"),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
       body: Container(
         padding: const EdgeInsets.all(20),
         margin: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
+          color: Theme.of(context).colorScheme.surface,
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).colorScheme.primary.withAlpha(50),
+              blurRadius: 10,
+              offset: const Offset(0, 5),
+            ),
+          ],
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(

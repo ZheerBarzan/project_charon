@@ -30,7 +30,6 @@ class _LoginPageState extends State<LoginPage> {
         password: password,
       );
 
-      final user = await widget.account.get();
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -121,14 +120,32 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 50.0),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    foregroundColor: Theme.of(context).colorScheme.surface,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 100.0,
+                      vertical: 15.0,
+                    ),
+                  ),
                   onPressed: () {
                     login(emailController.text, passwordController.text);
                   },
                   child:
                       _isLoginInProgress
                           ? CircularProgressIndicator(color: Colors.white)
-                          : Text('Login'),
+                          : Text(
+                            'Login',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                 ),
+                const SizedBox(height: 16.0),
                 TextButton(
                   onPressed: widget.onTap,
 
