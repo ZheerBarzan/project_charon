@@ -23,7 +23,7 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -37,11 +37,11 @@ class MyDrawer extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CircleAvatar(
-                              backgroundColor: Colors.blue,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.primary,
                               radius: 30,
                               child: Text(
-                                user!.name?.substring(0, 1).toUpperCase() ??
-                                    'U',
+                                user!.name.substring(0, 1).toUpperCase(),
                                 style: const TextStyle(
                                   fontSize: 24,
                                   color: Colors.white,
@@ -50,20 +50,20 @@ class MyDrawer extends StatelessWidget {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              'Hello, ${user!.name ?? 'User'}',
+                              'Hello, ${user!.name}',
                               style: TextStyle(
                                 fontSize: 18,
                                 color:
                                     Theme.of(
                                       context,
-                                    ).colorScheme.inversePrimary,
+                                    ).colorScheme.inverseSurface,
                               ),
                             ),
                           ],
                         )
                         : Icon(
                           Icons.account_circle,
-                          color: Theme.of(context).colorScheme.inversePrimary,
+                          color: Theme.of(context).colorScheme.primary,
                           size: 50,
                         ),
               ),
@@ -72,7 +72,7 @@ class MyDrawer extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 25),
                 child: ListTile(
                   title: const Text("H O M E"),
-                  leading: const Icon(Icons.home),
+                  leading: const Icon(Icons.home_outlined),
                   onTap: () {
                     Navigator.of(context).pop();
                   },
@@ -83,7 +83,7 @@ class MyDrawer extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 25),
                 child: ListTile(
                   title: const Text("S E T T I N G S"),
-                  leading: const Icon(Icons.settings),
+                  leading: const Icon(Icons.settings_outlined),
                   onTap: () {
                     // Add navigation to settings page if needed
                     Navigator.push(
@@ -100,7 +100,7 @@ class MyDrawer extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 25),
                 child: ListTile(
                   title: const Text("D E B T O R S"),
-                  leading: const Icon(Icons.monetization_on),
+                  leading: const Icon(Icons.people_outline),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -119,7 +119,7 @@ class MyDrawer extends StatelessWidget {
             padding: const EdgeInsets.only(left: 25, bottom: 25),
             child: ListTile(
               title: Text(user != null ? "L O G O U T" : "L O G I N"),
-              leading: Icon(user != null ? Icons.logout : Icons.login),
+              leading: Icon(user != null ? Icons.logout_outlined : Icons.login),
               onTap: () {
                 if (user != null) {
                   logout(context);

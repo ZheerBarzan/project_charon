@@ -14,19 +14,18 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Welcome ${user?.name ?? ""}')),
+      appBar: AppBar(
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          child: Text('Hello ${user?.name ?? ""}'),
+        ),
+      ),
       drawer: MyDrawer(account: account, user: user),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 20),
-            const Text(
-              'Welcome to Debt Collector',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
             const SizedBox(height: 40),
             _buildFeatureCard(
               context,
@@ -54,14 +53,18 @@ class HomePage extends StatelessWidget {
     VoidCallback onTap,
   ) {
     return Card(
-      elevation: 4,
+      elevation: 10,
       child: InkWell(
         onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
             children: [
-              Icon(icon, size: 48, color: Theme.of(context).primaryColor),
+              Icon(
+                icon,
+                size: 48,
+                color: Theme.of(context).colorScheme.primary,
+              ),
               const SizedBox(width: 16),
               Expanded(
                 child: Column(
@@ -77,7 +80,9 @@ class HomePage extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       description,
-                      style: TextStyle(color: Colors.grey[600]),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.inverseSurface,
+                      ),
                     ),
                   ],
                 ),

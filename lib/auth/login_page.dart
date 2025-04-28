@@ -89,38 +89,54 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login Page')),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            SizedBox(height: 16.0),
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                login(emailController.text, passwordController.text);
-              },
-              child:
-                  _isLoginInProgress
-                      ? CircularProgressIndicator(color: Colors.white)
-                      : Text('Login'),
-            ),
-            TextButton(
-              onPressed: widget.onTap,
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                // Logo or App Name
+                FlutterLogo(size: 100),
+                const SizedBox(height: 50),
+                Text(
+                  'Welcome Back',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.normal,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                const SizedBox(height: 50),
+                TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(labelText: 'Email'),
+                ),
+                SizedBox(height: 30.0),
+                TextField(
+                  controller: passwordController,
+                  decoration: InputDecoration(labelText: 'Password'),
+                  obscureText: true,
+                ),
+                SizedBox(height: 50.0),
+                ElevatedButton(
+                  onPressed: () {
+                    login(emailController.text, passwordController.text);
+                  },
+                  child:
+                      _isLoginInProgress
+                          ? CircularProgressIndicator(color: Colors.white)
+                          : Text('Login'),
+                ),
+                TextButton(
+                  onPressed: widget.onTap,
 
-              child: Text("Don't have an account? Sign up"),
+                  child: Text("Don't have an account? Sign up"),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

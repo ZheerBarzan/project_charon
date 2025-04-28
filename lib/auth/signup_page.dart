@@ -59,42 +59,59 @@ class _SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextField(
-              controller: nameController,
-              decoration: InputDecoration(labelText: 'Name'),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                // Logo or App Name
+                FlutterLogo(size: 100),
+                const SizedBox(height: 50),
+                // Signup Form
+                Text(
+                  'Create an Account',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.normal,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                const SizedBox(height: 50),
+                TextField(
+                  controller: nameController,
+                  decoration: InputDecoration(labelText: 'Name'),
+                ),
+                SizedBox(height: 20.0),
+                TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(labelText: 'Email'),
+                ),
+                SizedBox(height: 20.0),
+                TextField(
+                  controller: passwordController,
+                  decoration: InputDecoration(labelText: 'Password'),
+                  obscureText: true,
+                ),
+                SizedBox(height: 50.0),
+                ElevatedButton(
+                  onPressed: () {
+                    signup(
+                      emailController.text.trim(),
+                      passwordController.text.trim(),
+                      nameController.text.trim(),
+                    );
+                  },
+                  child: Text('Sign Up'),
+                ),
+                SizedBox(height: 16.0),
+                TextButton(
+                  onPressed: widget.onTap,
+                  child: const Text("Already have an account? Login"),
+                ),
+              ],
             ),
-            SizedBox(height: 16.0),
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            SizedBox(height: 16.0),
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            SizedBox(height: 24.0),
-            ElevatedButton(
-              onPressed: () {
-                signup(
-                  emailController.text.trim(),
-                  passwordController.text.trim(),
-                  nameController.text.trim(),
-                );
-              },
-              child: Text('Sign Up'),
-            ),
-            SizedBox(height: 16.0),
-            TextButton(
-              onPressed: widget.onTap,
-              child: const Text("Already have an account? Login"),
-            ),
-          ],
+          ),
         ),
       ),
     );

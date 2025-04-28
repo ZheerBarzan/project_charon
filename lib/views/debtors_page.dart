@@ -1,6 +1,5 @@
 // lib/views/debtors_page.dart
 import 'package:flutter/material.dart';
-import 'package:appwrite/models.dart' as models;
 import 'package:project_charon/model/debtor.dart';
 import 'package:project_charon/services/database_service.dart';
 import 'package:project_charon/views/debtor_detail_page.dart';
