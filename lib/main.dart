@@ -33,9 +33,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: Provider.of<ThemeProvider>(context).themeData,
-      home: AuthPage(
+      /*home: AuthPage(
         account: account,
-      ), // Use AuthPage as the home page to manage login/signup toggle
+      ), */
+      // Use AuthPage as the home page to manage login/signup toggle
+      home: HomePage(account: account),
     );
   }
 }

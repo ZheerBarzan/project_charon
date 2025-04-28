@@ -3,6 +3,7 @@ import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
 import 'package:project_charon/views/home_page.dart';
 import 'package:project_charon/auth/auth_page.dart';
+import 'package:project_charon/views/settings_page.dart';
 
 class MyDrawer extends StatelessWidget {
   final Account account;
@@ -85,6 +86,12 @@ class MyDrawer extends StatelessWidget {
                   leading: const Icon(Icons.settings),
                   onTap: () {
                     // Add navigation to settings page if needed
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsPage(),
+                      ),
+                    );
                   },
                 ),
               ),
