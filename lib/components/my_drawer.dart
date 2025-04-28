@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
-import 'package:project_charon/views/home_page.dart';
+import 'package:project_charon/views/debtors_page.dart';
 import 'package:project_charon/auth/auth_page.dart';
 import 'package:project_charon/views/settings_page.dart';
 
@@ -90,6 +90,23 @@ class MyDrawer extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => const SettingsPage(),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              // In lib/components/my_drawer.dart, add this to the Column of drawer items:
+              Padding(
+                padding: const EdgeInsets.only(left: 25),
+                child: ListTile(
+                  title: const Text("D E B T O R S"),
+                  leading: const Icon(Icons.monetization_on),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DebtorsPage(),
                       ),
                     );
                   },
