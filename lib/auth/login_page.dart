@@ -1,6 +1,6 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
-import 'package:project_charon/views/home_page.dart';
+import 'package:project_charon/views/navigation/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   final Account account;

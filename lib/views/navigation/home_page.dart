@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:project_charon/views/debtors_page.dart';
+import 'package:project_charon/views/navigation/debtors_page.dart';
 import 'package:project_charon/views/mange_debtor.dart';
-import 'package:project_charon/views/profile_page.dart';
-import 'package:project_charon/views/settings_page.dart'; // Add this import
+import 'package:project_charon/views/navigation/profile_page.dart';
+import 'package:project_charon/views/navigation/settings_page.dart'; // Add this import
 
 class HomePage extends StatefulWidget {
   final Account account;

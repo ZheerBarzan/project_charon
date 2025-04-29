@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:project_charon/auth/auth_page.dart';
-import 'package:project_charon/views/home_page.dart';
+import 'package:project_charon/views/navigation/home_page.dart';
 import 'package:project_charon/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:project_charon/services/database_service.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_charon/views/debtors_page.dart';
+import 'package:project_charon/views/navigation/debtors_page.dart';
 
 class MangeDebtor extends StatelessWidget {
   const MangeDebtor({super.key});
