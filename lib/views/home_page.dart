@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:project_charon/components/my_drawer.dart';
 import 'package:project_charon/views/debtors_page.dart';
 import 'package:project_charon/views/mange_debtor.dart';
 import 'package:project_charon/views/profile_page.dart';
@@ -22,13 +21,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
-  List pages = [
-    const MangeDebtor(),
-    const DebtorsPage(),
-    const SettingsPage(),
-    const ProfilePage(),
-  ];
-
   void goToPages(int index) {
     setState(() {
       _currentIndex = index;
@@ -38,13 +30,13 @@ class _HomePageState extends State<HomePage> {
   AppBar _buildAppBar() {
     switch (_currentIndex) {
       case 0:
-        return AppBar(title: Text("Hello ${widget.user?.name}"));
+        return AppBar(title: Center(child: Text("Hello ${widget.user?.name}")));
       case 1:
-        return AppBar(title: const Text("Debtors List"));
+        return AppBar(title: Center(child: const Text("Debtors List")));
       case 2:
-        return AppBar(title: const Text("Settings"));
+        return AppBar(title: Center(child: const Text("Settings")));
       case 3:
-        return AppBar(title: const Text("Profile"));
+        return AppBar(title: Center(child: const Text("Profile")));
       default:
         return AppBar();
     }
@@ -58,18 +50,22 @@ class _HomePageState extends State<HomePage> {
     if (widget.user?.name == null) {
       return const Scaffold(body: Center(child: Text("User not found")));
     }
-
+    List<Widget> pages = [
+      const MangeDebtor(),
+      const DebtorsPage(),
+      const SettingsPage(),
+      ProfilePage(user: widget.user!, account: widget.account),
+    ];
     return Scaffold(
       appBar: _buildAppBar(),
-      drawer: MyDrawer(user: widget.user!, account: widget.account),
       body: pages[_currentIndex],
 
       bottomNavigationBar: Container(
-        color: Theme.of(context).colorScheme.inverseSurface,
+        color: Theme.of(context).colorScheme.surface,
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: GNav(
-            backgroundColor: Theme.of(context).colorScheme.inverseSurface,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             gap: 8,
             onTabChange: (index) => goToPages(index),
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -78,8 +74,8 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: BorderRadius.circular(25),
                 icon: Icons.home,
                 backgroundColor: Theme.of(context).colorScheme.primary,
-                iconActiveColor: Colors.white,
-                iconColor: Colors.white,
+                iconActiveColor: Theme.of(context).colorScheme.surface,
+                iconColor: Theme.of(context).colorScheme.inverseSurface,
                 text: "Home",
                 textColor: Theme.of(context).colorScheme.surface,
               ),
@@ -87,8 +83,8 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: BorderRadius.circular(25),
                 icon: Icons.list,
                 backgroundColor: Theme.of(context).colorScheme.primary,
-                iconActiveColor: Colors.white,
-                iconColor: Colors.white,
+                iconActiveColor: Theme.of(context).colorScheme.surface,
+                iconColor: Theme.of(context).colorScheme.inverseSurface,
                 text: "Debtors",
                 textColor: Theme.of(context).colorScheme.surface,
               ),
@@ -96,8 +92,8 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: BorderRadius.circular(25),
                 icon: Icons.settings_outlined,
                 backgroundColor: Theme.of(context).colorScheme.primary,
-                iconActiveColor: Colors.white,
-                iconColor: Colors.white,
+                iconActiveColor: Theme.of(context).colorScheme.surface,
+                iconColor: Theme.of(context).colorScheme.inverseSurface,
                 text: "Settings",
                 textColor: Theme.of(context).colorScheme.surface,
               ),
@@ -105,8 +101,8 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: BorderRadius.circular(25),
                 icon: Icons.person,
                 backgroundColor: Theme.of(context).colorScheme.primary,
-                iconActiveColor: Colors.white,
-                iconColor: Colors.white,
+                iconActiveColor: Theme.of(context).colorScheme.surface,
+                iconColor: Theme.of(context).colorScheme.inverseSurface,
                 text: "Profile",
                 textColor: Theme.of(context).colorScheme.surface,
               ),
