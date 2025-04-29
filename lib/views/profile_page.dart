@@ -24,6 +24,7 @@ class ProfilePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
 
           children: [
+            Spacer(),
             // Profile Header
             CircleAvatar(
               backgroundColor: Theme.of(context).colorScheme.primary,
@@ -33,7 +34,7 @@ class ProfilePage extends StatelessWidget {
                 style: const TextStyle(fontSize: 24, color: Colors.white),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             Text(
               'Hello, ${user!.name}',
               style: TextStyle(
@@ -52,7 +53,7 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 50),
 
             // logout button
             ElevatedButton(
@@ -70,6 +71,8 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
+            Spacer(),
+            Center(child: Text("Made by Zheer Barzan with Flutter 💙")),
           ],
         ),
       ),

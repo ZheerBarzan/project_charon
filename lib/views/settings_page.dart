@@ -1,4 +1,3 @@
-import 'package:appwrite/models.dart' as models;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_charon/themes/theme_provider.dart';

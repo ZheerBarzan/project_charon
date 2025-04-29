@@ -30,13 +30,25 @@ class _HomePageState extends State<HomePage> {
   AppBar _buildAppBar() {
     switch (_currentIndex) {
       case 0:
-        return AppBar(title: Center(child: Text("Hello ${widget.user?.name}")));
+        return AppBar(
+          title: Center(child: Text("Hello ${widget.user?.name}")),
+          elevation: 1,
+        );
       case 1:
-        return AppBar(title: Center(child: const Text("Debtors List")));
+        return AppBar(
+          title: Center(child: const Text("Debtors List")),
+          elevation: 1,
+        );
       case 2:
-        return AppBar(title: Center(child: const Text("Settings")));
+        return AppBar(
+          title: Center(child: const Text("Settings")),
+          elevation: 1,
+        );
       case 3:
-        return AppBar(title: Center(child: const Text("Profile")));
+        return AppBar(
+          title: Center(child: const Text("Profile")),
+          elevation: 1,
+        );
       default:
         return AppBar();
     }

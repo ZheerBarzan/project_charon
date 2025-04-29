@@ -24,8 +24,6 @@ class MangeDebtor extends StatelessWidget {
               );
             },
           ),
-          Spacer(),
-          Center(child: Text("Made by Zheer Barzan with Flutter 💙")),
         ],
       ),
     );
