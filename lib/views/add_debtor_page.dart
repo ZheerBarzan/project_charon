@@ -6,7 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:appwrite/appwrite.dart';
 
 class AddDebtorPage extends StatefulWidget {
-  const AddDebtorPage({super.key});
+  final String? userId;
+  const AddDebtorPage({super.key, this.userId});
 
   @override
   State<AddDebtorPage> createState() => _AddDebtorPageState();
@@ -41,7 +42,7 @@ class _AddDebtorPageState extends State<AddDebtorPage> {
         );
 
         final debtor = Debtor(
-          id: ID.unique(), // This will be replaced when saved to Appwrite
+          id: ID.unique(),
           name: _nameController.text.trim(),
           phoneNumber:
               _phoneController.text.isEmpty
@@ -50,7 +51,8 @@ class _AddDebtorPageState extends State<AddDebtorPage> {
           note:
               _noteController.text.isEmpty ? null : _noteController.text.trim(),
           currency: _selectedCurrency,
-          currentBalance: 0, // New debtors start with zero balance
+          currentBalance: 0,
+          userId: widget.userId!, // Include the userId
         );
 
         await databaseService.createDebtor(debtor);

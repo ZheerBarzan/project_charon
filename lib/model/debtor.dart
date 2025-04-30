@@ -6,6 +6,7 @@ class Debtor {
   String? note;
   String currency; // "IQD" or "USD"
   double currentBalance;
+  String userId;
 
   Debtor({
     required this.id,
@@ -14,6 +15,7 @@ class Debtor {
     this.note,
     required this.currency,
     required this.currentBalance,
+    required this.userId,
   });
 
   factory Debtor.fromMap(Map<String, dynamic> map) {
@@ -24,6 +26,7 @@ class Debtor {
       note: map['note'],
       currency: map['currency'],
       currentBalance: map['currentBalance'].toDouble(),
+      userId: map['userId'],
     );
   }
 
@@ -34,6 +37,7 @@ class Debtor {
       'note': note,
       'currency': currency,
       'currentBalance': currentBalance,
+      'userId': userId,
     };
   }
 }

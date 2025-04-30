@@ -7,7 +7,8 @@ import 'package:project_charon/views/add_debtor_page.dart';
 import 'package:provider/provider.dart';
 
 class DebtorsPage extends StatefulWidget {
-  const DebtorsPage({super.key});
+  final String? userId;
+  const DebtorsPage({super.key, this.userId});
 
   @override
   State<DebtorsPage> createState() => _DebtorsPageState();
@@ -32,20 +33,26 @@ class _DebtorsPageState extends State<DebtorsPage> {
     });
 
     try {
-      final debtorsData = await _databaseService.getAllDebtors();
+      final debtorsData =
+          widget.userId != null
+              ? await _databaseService.getDebtorsForUser(widget.userId!)
+              : await _databaseService
+                  .getAllDebtors(); // Fallback to all debtors if userId is null
+
       setState(() {
         _debtors =
             debtorsData.documents
                 .map((doc) => Debtor.fromMap(doc.data))
                 .toList();
-        _filteredDebtors =
-            _debtors; // Initialize filtered list with all debtors
+        _filteredDebtors = _debtors;
         _isLoading = false;
       });
     } catch (e) {
       print('Error loading debtors: $e');
       setState(() {
         _isLoading = false;
+        _debtors = []; // Ensure we have an empty list rather than null
+        _filteredDebtors = [];
       });
     }
   }
@@ -131,7 +138,9 @@ class _DebtorsPageState extends State<DebtorsPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const AddDebtorPage()),
+            MaterialPageRoute(
+              builder: (context) => AddDebtorPage(userId: widget.userId),
+            ),
           ).then((_) => _loadDebtors());
         },
         child: const Icon(Icons.add),

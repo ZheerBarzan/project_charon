@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 // Logo or App Name
-                FlutterLogo(size: 100),
+                Image.asset('lib/assets/images/logo.png', height: 100),
                 const SizedBox(height: 50),
                 Text(
                   'Welcome Back',

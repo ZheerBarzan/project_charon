@@ -59,12 +59,12 @@ class _HomePageState extends State<HomePage> {
     if (widget.user == null) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
-    if (widget.user?.name == null) {
-      return const Scaffold(body: Center(child: Text("User not found")));
-    }
+
+    String userId = widget.user!.$id;
+
     List<Widget> pages = [
-      const MangeDebtor(),
-      const DebtorsPage(),
+      MangeDebtor(userId: userId),
+      DebtorsPage(userId: userId),
       const SettingsPage(),
       ProfilePage(user: widget.user!, account: widget.account),
     ];

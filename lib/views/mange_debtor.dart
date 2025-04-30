@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:project_charon/views/navigation/debtors_page.dart';
 
 class MangeDebtor extends StatelessWidget {
-  const MangeDebtor({super.key});
+  final String userId;
+  const MangeDebtor({super.key, required this.userId});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,9 @@ class MangeDebtor extends StatelessWidget {
             () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const DebtorsPage()),
+                MaterialPageRoute(
+                  builder: (context) => DebtorsPage(userId: userId),
+                ),
               );
             },
           ),

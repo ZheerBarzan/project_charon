@@ -114,6 +114,20 @@ class DatabaseService {
     );
   }
 
+  Future<models.DocumentList> getDebtorsForUser(String userId) async {
+    try {
+      return await databases.listDocuments(
+        databaseId: databaseId,
+        collectionId: debtorsCollectionId,
+        queries: [Query.equal('userId', userId)], // Filter by userId
+      );
+    } catch (e) {
+      print('Error getting debtors for user: $e');
+      // Return an empty document list instead of throwing an error
+      return models.DocumentList(total: 0, documents: []);
+    }
+  }
+
   Future<void> deleteTransaction(
     String id,
     String debtorId,

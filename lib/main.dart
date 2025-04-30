@@ -14,7 +14,8 @@ void main() {
   // Initialize Appwrite client and account
   Client client = Client()
       .setEndpoint("https://fra.cloud.appwrite.io/v1")
-      .setProject("680df948001ab4474ff0");
+      .setProject("680df948001ab4474ff0")
+      .setSelfSigned(status: true);
   Account account = Account(client);
   Databases databases = Databases(client);
 

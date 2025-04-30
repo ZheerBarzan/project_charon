@@ -42,15 +42,22 @@ class _SignupPageState extends State<SignupPage> {
         ),
       );
     } on AppwriteException catch (e) {
-      // Handle signup error
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Signup failed: ${e.message}')));
+      // Show more detailed error message
+      print('Signup error code: ${e.code}');
+      print('Signup error message: ${e.message}');
+      print('Signup error type: ${e.type}');
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Signup failed: ${e.message} (Code: ${e.code})'),
+        ),
+      );
     } catch (e) {
       // Handle other errors
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('An unexpected error occurred')));
+      print('Unexpected error: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('An unexpected error occurred: $e')),
+      );
     }
   }
 
@@ -65,7 +72,7 @@ class _SignupPageState extends State<SignupPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 // Logo or App Name
-                FlutterLogo(size: 100),
+                Image.asset('lib/assets/images/logo.png', height: 100),
                 const SizedBox(height: 50),
                 // Signup Form
                 Text(
