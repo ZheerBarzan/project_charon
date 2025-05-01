@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart';
-import 'package:project_charon/views/navigation/home_page.dart';
+import 'package:debtology/views/navigation/home_page.dart';
 
 // Dummy HomePage, you can replace it with your real HomePage
 

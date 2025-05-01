@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_charon/views/navigation/debtors_page.dart';
+import 'package:debtology/views/navigation/debtors_page.dart';
 
 class MangeDebtor extends StatelessWidget {
   final String userId;

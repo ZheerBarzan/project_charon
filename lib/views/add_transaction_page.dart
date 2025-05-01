@@ -1,7 +1,7 @@
 // lib/views/add_transaction_page.dart
 import 'package:flutter/material.dart';
-import 'package:project_charon/model/transaction.dart';
-import 'package:project_charon/services/database_service.dart';
+import 'package:debtology/model/transaction.dart';
+import 'package:debtology/services/database_service.dart';
 import 'package:provider/provider.dart';
 import 'package:appwrite/appwrite.dart';
 

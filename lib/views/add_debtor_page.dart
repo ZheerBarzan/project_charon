@@ -1,7 +1,7 @@
 // lib/views/add_debtor_page.dart
 import 'package:flutter/material.dart';
-import 'package:project_charon/model/debtor.dart';
-import 'package:project_charon/services/database_service.dart';
+import 'package:debtology/model/debtor.dart';
+import 'package:debtology/services/database_service.dart';
 import 'package:provider/provider.dart';
 import 'package:appwrite/appwrite.dart';
 

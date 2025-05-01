@@ -1,8 +1,8 @@
 // lib/services/database_service.dart
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
-import 'package:project_charon/model/debtor.dart';
-import 'package:project_charon/model/transaction.dart';
+import 'package:debtology/model/debtor.dart';
+import 'package:debtology/model/transaction.dart';
 
 class DatabaseService {
   final Databases databases;

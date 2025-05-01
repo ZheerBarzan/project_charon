@@ -1,7 +1,7 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
 import 'package:flutter/material.dart';
-import 'package:project_charon/auth/auth_page.dart';
+import 'package:debtology/auth/auth_page.dart';
 
 class ProfilePage extends StatelessWidget {
   final Account account;

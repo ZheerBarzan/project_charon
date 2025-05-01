@@ -1,9 +1,9 @@
 // lib/views/debtors_page.dart
 import 'package:flutter/material.dart';
-import 'package:project_charon/model/debtor.dart';
-import 'package:project_charon/services/database_service.dart';
-import 'package:project_charon/views/debtor_detail_page.dart';
-import 'package:project_charon/views/add_debtor_page.dart';
+import 'package:debtology/model/debtor.dart';
+import 'package:debtology/services/database_service.dart';
+import 'package:debtology/views/debtor_detail_page.dart';
+import 'package:debtology/views/add_debtor_page.dart';
 import 'package:provider/provider.dart';
 
 class DebtorsPage extends StatefulWidget {

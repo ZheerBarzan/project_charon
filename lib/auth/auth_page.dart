@@ -1,7 +1,7 @@
+import 'package:debtology/auth/login_page.dart';
+import 'package:debtology/auth/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart';
-import 'package:project_charon/auth/login_page.dart';
-import 'package:project_charon/auth/signup_page.dart';
 
 class AuthPage extends StatefulWidget {
   final Account account;

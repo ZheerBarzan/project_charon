@@ -1,4 +1,4 @@
-package com.example.project_charon
+package com.example.debtology
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_charon/themes/light_theme.dart';
-import 'package:project_charon/themes/dark_theme.dart';
+import 'package:debtology/themes/light_theme.dart';
+import 'package:debtology/themes/dark_theme.dart';
 
 class ThemeProvider extends ChangeNotifier {
   ThemeData _themeData = lightMode;
