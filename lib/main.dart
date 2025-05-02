@@ -1,4 +1,4 @@
-// Update in lib/main.dart
+import 'package:debtology/l10n/local_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:debtology/auth/auth_page.dart';
@@ -7,6 +7,13 @@ import 'package:debtology/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:debtology/services/database_service.dart';
 import 'package:appwrite/models.dart' as models;
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+// Helper extension for easier access to localizations
+extension AppLocalizationsExtension on BuildContext {
+  AppLocalizations get l10n => AppLocalizations.of(this)!;
+}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +33,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(create: (context) => LocaleProvider()),
         Provider.value(value: account),
         Provider.value(value: databaseService),
       ],
@@ -49,10 +57,30 @@ class MyApp extends StatelessWidget {
     // Initialize the database
     databaseService.initializeDatabase();
 
+    final localeProvider = Provider.of<LocaleProvider>(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Debt Collector',
+      title: 'Debtology',
       theme: Provider.of<ThemeProvider>(context).themeData,
+      locale: localeProvider.locale,
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'), // English
+        Locale('ar'), // Arabic
+        Locale('ku'), // Kurdish
+      ],
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       home: FutureBuilder<models.User>(
         future: _getLoggedInUser(),
         builder: (context, snapshot) {
