@@ -45,7 +45,11 @@ void main() {
 class MyApp extends StatelessWidget {
   final Account account;
   final DatabaseService databaseService;
-
+  static final List<Locale> _supportedLocales = [
+    Locale('en'), // English
+    Locale('ar'), // Arabic
+    Locale('ku'), // Kurdish
+  ];
   const MyApp({
     super.key,
     required this.account,
@@ -64,17 +68,9 @@ class MyApp extends StatelessWidget {
       title: 'Debtology',
       theme: Provider.of<ThemeProvider>(context).themeData,
       locale: localeProvider.locale,
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en'), // English
-        Locale('ar'), // Arabic
-        Locale('ku'), // Kurdish
-      ],
+
+      supportedLocales: _supportedLocales,
+
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
