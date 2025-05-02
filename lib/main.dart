@@ -1,3 +1,4 @@
+// lib/main.dart - Updated to support localization
 import 'package:debtology/l10n/local_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart' as appwrite;
@@ -7,8 +8,8 @@ import 'package:debtology/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:debtology/services/database_service.dart';
 import 'package:appwrite/models.dart' as models;
-
-// Helper extension for easier access to localizations
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,10 +54,18 @@ class MyApp extends StatelessWidget {
     // Initialize the database
     databaseService.initializeDatabase();
 
+    // Get current locale from provider
+    final localeProvider = Provider.of<LocaleProvider>(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Debtology',
       theme: Provider.of<ThemeProvider>(context).themeData,
+
+      // Add localization support
+      locale: localeProvider.locale,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
 
       home: FutureBuilder<models.User>(
         future: _getLoggedInUser(),
