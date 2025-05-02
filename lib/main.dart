@@ -1,30 +1,26 @@
 import 'package:debtology/l10n/local_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/appwrite.dart' as appwrite;
 import 'package:debtology/auth/auth_page.dart';
 import 'package:debtology/views/navigation/home_page.dart';
 import 'package:debtology/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:debtology/services/database_service.dart';
 import 'package:appwrite/models.dart' as models;
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Helper extension for easier access to localizations
-extension AppLocalizationsExtension on BuildContext {
-  AppLocalizations get l10n => AppLocalizations.of(this)!;
-}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize Appwrite client and account
-  Client client = Client()
+  appwrite.Client client = appwrite.Client()
       .setEndpoint("https://fra.cloud.appwrite.io/v1")
       .setProject("680df948001ab4474ff0")
       .setSelfSigned(status: true);
-  Account account = Account(client);
-  Databases databases = Databases(client);
+
+  appwrite.Account account = appwrite.Account(client);
+  appwrite.Databases databases = appwrite.Databases(client);
 
   // Initialize DatabaseService
   DatabaseService databaseService = DatabaseService(databases: databases);
@@ -43,13 +39,9 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final Account account;
+  final appwrite.Account account;
   final DatabaseService databaseService;
-  static final List<Locale> _supportedLocales = [
-    Locale('en'), // English
-    Locale('ar'), // Arabic
-    Locale('ku'), // Kurdish
-  ];
+
   const MyApp({
     super.key,
     required this.account,
@@ -61,22 +53,11 @@ class MyApp extends StatelessWidget {
     // Initialize the database
     databaseService.initializeDatabase();
 
-    final localeProvider = Provider.of<LocaleProvider>(context);
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Debtology',
       theme: Provider.of<ThemeProvider>(context).themeData,
-      locale: localeProvider.locale,
 
-      supportedLocales: _supportedLocales,
-
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
       home: FutureBuilder<models.User>(
         future: _getLoggedInUser(),
         builder: (context, snapshot) {
